@@ -1,0 +1,33 @@
+version: '3.7' 
+services: 
+
+  php-fpm: 
+    container_name: php-fpm
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    depends_on:
+          - nginx
+  nginx:
+      container_name: server
+      build:
+        context: .
+        dockerfile: ./docker/nginx/Dockerfile
+      volumes: 
+        - ./logs/nginx/:/var/log/nginx
+      ports:
+        - "0.0.0.0:80:80"
+      networks:
+        - default
+  mailcatcher:
+        container_name: mailcatcher
+        restart: on-failure:10
+        image: dockage/mailcatcher:0.7.1
+        networks:
+          - default
+        ports:
+        - "1080:1080"
+        - "1025:1025"
+networks:
+  default:
+    driver: bridge
