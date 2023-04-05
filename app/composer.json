@@ -1,7 +1,5 @@
 {
     "require": {
-        "tecnickcom/tcpdf": "^6.6",
-        "tonchik-tm/pdf-to-html": "^1.0",
         "swiftmailer/swiftmailer": "^6.3"
     }
 }

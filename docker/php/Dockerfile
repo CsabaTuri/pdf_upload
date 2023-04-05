@@ -16,7 +16,8 @@ COPY ./app /var/www/html
 
 RUN cd /var/www/html && composer install
 
-RUN sudo apt-get install poppler-utils -y
+RUN sudo apt-get install python3-pip python3-cffi python3-brotli libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0 -y
 
-RUN chmod -R 777 /usr/bin/pdfinfo && \
-    chmod -R 777 /usr/bin/pdftohtml
+RUN pip install pycryptodome PyPDF2
+
+RUN sudo apt-get install qpdf -y
